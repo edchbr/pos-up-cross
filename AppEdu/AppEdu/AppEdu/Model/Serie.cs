@@ -1,4 +1,5 @@
 ﻿using System;
+using AppEdu.Infra;
 using Newtonsoft.Json;
 
 namespace AppEdu.Model
@@ -10,9 +11,8 @@ namespace AppEdu.Model
 
         [JsonProperty("name")]
         public string Name { get; set; }
-        S
 
-[JsonProperty("first_air_date")]
+        [JsonProperty("first_air_date")]
         public DateTimeOffset FirstAirDate { get; set; }
 
         [JsonProperty("backdrop_path")]
@@ -31,6 +31,23 @@ namespace AppEdu.Model
         public string PosterPath { get; set; }
 
         [JsonIgnore]
-        public string ReleaseDate { get { return $"(FirstAirDate: dd/mm/yy)"} }
+        public string Poster
+        {
+            get { return $"{AppSetting.ApiImageBaseUrl}{ PosterPath}"; }
+        }
+        [JsonIgnore]
+        public string Backdrop
+        {
+            get { return $"{AppSetting.ApiImageBaseUrl}{ BackdropPath}"; }
+        }
+
+        [JsonIgnore]
+        public string ReleaseDate
+        {
+            get
+            {
+                return $"{FirstAirDate:dd/MM/yy}";
+            }
+        }
     }
 }

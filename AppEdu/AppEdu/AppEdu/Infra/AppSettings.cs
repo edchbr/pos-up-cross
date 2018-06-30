@@ -6,9 +6,9 @@ namespace AppEdu.Infra
 {
     public static class AppSetting
     {
-        public const string ApiUrl = "https://api-endpoint.igdb.com/3";
-        public const string ApiKey = "e0f975bc09eaf8c1aa2b00a9acd7576c";
-        public const string ApiImageBaseUrl = "https://images.igdb.com/igdb/image/upload/";
+        public const string ApiUrl = "https://api.themoviedb.org/3";
+        public const string ApiKey = "e548d44d54173e4935215cdbd821784c";
+        public const string ApiImageBaseUrl = "https://image.tmdb.org/t/p/w500/";
     }
 
 }

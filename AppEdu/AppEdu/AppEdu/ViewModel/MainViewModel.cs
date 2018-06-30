@@ -26,7 +26,7 @@ namespace AppEdu.ViewModel
 
             Itens = new ObservableCollection<Serie>();
 
-            ItemClickCommand = new Command<Serie>(async (iten) => await ItemClickCommandExecute(item));
+            ItemClickCommand = new Command<Serie>(async (item) => await ItemClickCommandExecute(item));
         }
 
         async Task ItemClickCommandExecute(Serie serie)

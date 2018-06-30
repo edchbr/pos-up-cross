@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AppEdu.Infra.Api
 {
-    [Header("Content-Type: application/json")]
+    [Headers("Content-Type: application/json")]
     public interface ITmdbApi
     {
         [Get("/tv/popular?api_key=(apiKey)")]

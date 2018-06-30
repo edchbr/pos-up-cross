@@ -19,7 +19,6 @@ namespace AppEdu.Service
             get { return Application.Current; }
         }
 
-
         public NavigationService()
         {
             _mappings = new Dictionary<Type, Type>();
@@ -37,25 +36,24 @@ namespace AppEdu.Service
             await NavigateToAsync<MainViewModel>();
         }
 
-
-
-        public async Task NavigateAndClearBackStackAsync<TViewModel>(object parameter = null) where TViewModel : ViewModelBase
+        public async Task NavigateAndClearBackStackAsync<TViewModel>(object parameter = null)
+            where TViewModel : ViewModelBase
         {
-            Page page = CreatorAndBindPage(typeof(TViewModel), parameter);
+            Page page = CreateAndBingPage(typeof(TViewModel), parameter);
             var navigationPage = CurrentApplication.MainPage as NavigationPage;
+
             await navigationPage.PushAsync(page);
+
             await (page.BindingContext as ViewModelBase).InitializeAsync(parameter);
 
             if (navigationPage != null && navigationPage.Navigation.NavigationStack.Count > 0)
             {
                 var existingPages = navigationPage.Navigation.NavigationStack.ToList();
+
                 foreach (var existingPage in existingPages)
                 {
                     if (existingPage != page)
-                    {
                         navigationPage.Navigation.RemovePage(existingPage);
-                    }
-
                 }
             }
         }
@@ -69,20 +67,20 @@ namespace AppEdu.Service
         }
 
         public Task NavigateToAsync<TViewModel>() where TViewModel : ViewModelBase
-        => InternalNavigateToAsync(typeof(TViewModel), null);
+            => InternalNavigateToAsync(typeof(TViewModel), null);
 
         public Task NavigateToAsync<TViewModel>(object parameter) where TViewModel : ViewModelBase
-        => InternalNavigateToAsync(typeof(TViewModel), parameter);
+            => InternalNavigateToAsync(typeof(TViewModel), parameter);
 
         public Task NavigateToAsync(Type viewModelType)
-        => InternalNavigateToAsync(viewModelType, null);
+            => InternalNavigateToAsync(viewModelType, null);
 
         public Task NavigateToAsync(Type viewModelType, object parameter)
-        => InternalNavigateToAsync(viewModelType, parameter);
+            => InternalNavigateToAsync(viewModelType, parameter);
 
-        async Task InternalNavigateToAsync(Type viewMoldelType, object parameter)
+        async Task InternalNavigateToAsync(Type viewModelType, object parameter)
         {
-            Page page = CreatorAndBindPage(viewMoldelType, parameter);
+            Page page = CreateAndBingPage(viewModelType, parameter);
 
             var navigationPage = CurrentApplication.MainPage as NavigationPage;
 
@@ -94,20 +92,28 @@ namespace AppEdu.Service
             {
                 CurrentApplication.MainPage = new NavigationPage(page);
             }
-            await (page.BindingContext as ViewModelBase).InitializeAsync(parameter);
+
+            await (page.BindingContext as ViewModelBase)
+                .InitializeAsync(parameter);
         }
 
-        Page CreatorAndBindPage(Type viewModelType, object parameter)
+        Page CreateAndBingPage(Type viewModelType, object parameter)
         {
             Type pageType = GetPageTypeForViewModel(viewModelType);
+
             if (pageType == null)
             {
-                throw new Exception($"O mapeamento para o tipo (viewModelType) não existe");
+                throw new Exception($"O mapeamento para o tipo {viewModelType} não existe!");
             }
 
             Page page = Activator.CreateInstance(pageType) as Page;
-            ViewModelBase viewModel = ViewModelLocator.Instance.Resolve(viewModelType) as ViewModelBase;
+
+            ViewModelBase viewModel = ViewModelLocator
+                .Instance
+                .Resolve(viewModelType) as ViewModelBase;
+
             page.BindingContext = viewModel;
+
             return page;
         }
 
@@ -115,14 +121,20 @@ namespace AppEdu.Service
         {
             if (!_mappings.ContainsKey(viewModelType))
             {
-                throw new Exception($"O tipo (viewModelType) não corresponde a nenhuma view");
+                throw new Exception($"O tipo {viewModelType} não corresponde a nenhuma View!");
             }
+
             return _mappings[viewModelType];
         }
+
+
+        #region Not Implemented
 
         public Task RemoveLastFromBackStack()
         {
             throw new NotImplementedException();
         }
+
+        #endregion
     }
 }
