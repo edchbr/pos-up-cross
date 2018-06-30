@@ -4,7 +4,7 @@ using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace AppEdu.Behavior
+namespace AppEdu.Behaviors
 {
 
     public static class AttachedItemTappedBehavior
@@ -31,3 +31,4 @@ namespace AppEdu.Behavior
                 control.SelectedItem = null;
             };
     }
+}
