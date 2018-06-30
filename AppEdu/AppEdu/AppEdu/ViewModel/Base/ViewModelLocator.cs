@@ -1,8 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
+using AppEdu.Infra;
+using AppEdu.Infra.Api;
+using AppEdu.Infra.HttpTools;
 using AppEdu.Service;
 using Autofac;
+using Refit;
 
 namespace AppEdu.ViewModel.Base
 {
@@ -20,10 +25,24 @@ namespace AppEdu.ViewModel.Base
         public ViewModelLocator()
         {
             _containerBuilder = new ContainerBuilder();
+
             _containerBuilder.RegisterType<NavigationService>().As<INavigationService>();
+            _containerBuilder.RegisterType<SerieService>().As<ISerieService>();
+
             _containerBuilder.RegisterType<MainViewModel>();
             _containerBuilder.RegisterType<DetailViewModel>();
 
+            _containerBuilder.Register(api =>
+            {
+                var client = new HttpClient(new HttpLoggingHandler())
+                {
+                    BaseAddress = new Uri(AppSetting.ApiUrl),
+                    Timeout = TimeSpan.FromSeconds(90)
+                };
+
+                return RestService.For<ITmdbApi>(client);
+
+            }).As<ITmdbApi>().InstancePerDependency();
         }
 
         public T Resolve<T>()
