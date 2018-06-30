@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AppEdu.Service
 {
-    public interface INavigation
+    public interface INavigationService
     {
         Task Initialize();
         Task NavigateToAsync<TViewModel>() where TViewModel : ViewModelBase;

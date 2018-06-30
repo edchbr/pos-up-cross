@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using AppEdu.Service;
 using Autofac;
 
 namespace AppEdu.ViewModel.Base
@@ -19,6 +20,10 @@ namespace AppEdu.ViewModel.Base
         public ViewModelLocator()
         {
             _containerBuilder = new ContainerBuilder();
+            _containerBuilder.RegisterType<NavigationService>().As<INavigationService>();
+            _containerBuilder.RegisterType<MainViewModel>();
+            _containerBuilder.RegisterType<DetailViewModel>();
+
         }
 
         public T Resolve<T>()
