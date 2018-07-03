@@ -9,12 +9,12 @@ using Xamarin.Forms.Xaml;
 
 namespace AppEdu.View
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class DetailView : ContentPage
-	{
-		public DetailView ()
-		{
-			InitializeComponent ();
-		}
-	}
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class DetailView : ContentPage
+    {
+        public DetailView()
+        {
+            InitializeComponent();
+        }
+    }
 }
