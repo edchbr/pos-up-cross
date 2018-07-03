@@ -6,8 +6,10 @@ namespace AppEdu.Infra
 {
     public static class AppSetting
     {
-        public const string ApiUrl = "https://api.themoviedb.org/3";
-        public const string ApiKey = "e548d44d54173e4935215cdbd821784c";
+        public const string ApiUrl = "https://api.themoviedb.org/3/tv";
+        public const string ApiKey = "83e87cc11fc2712a8b590c6a425661cf";
+        public const string ApiLanEn = "en-US";
+        public const string ApiLanBr = "pt-BR";
         public const string ApiImageBaseUrl = "https://image.tmdb.org/t/p/w500/";
     }
 
