@@ -44,13 +44,6 @@ namespace AppEdu.ViewModel
             get { return _votes; }
             set { _votes = value; OnPropertyChanged(); }
         }
-        //votes
-        double _date;
-        public double Date
-        {
-            get { return _date; }
-            set { _date = value; OnPropertyChanged(); }
-        }
         //release_date
         string _releaseDate;
         public string ReleaseDate

@@ -20,7 +20,7 @@ namespace AppEdu.ViewModel
 
         public ObservableCollection<Serie> Itens { get; }
 
-        public MainViewModel(ISerieService serieService) : base("Awesome Series")
+        public MainViewModel(ISerieService serieService) : base("App Edu")
         {
             _serieService = serieService;
 

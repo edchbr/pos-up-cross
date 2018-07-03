@@ -5,9 +5,19 @@
              x:Class="AppEdu.View.DetailView">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Titulo da Série"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            
+            <Image Source="{Binding Poster}"
+                                   VerticalOptions="Start"
+                                   HorizontalOptions="Center" 
+                                   HeightRequest="120" />
+            <Label Text="Descrição da série: " FontSize="Large" TextColor="Blue" HorizontalOptions="Center"/>
+            <Label Text="{Binding Overview}" FontSize="Medium" TextColor="Blue"/>
+
+            <StackLayout>
+                <Label Text="Data de lançamento: " FontSize="Large" TextColor="Red"/>
+                <Label Text="{Binding ReleaseDate}" FontSize="Medium" TextColor="Red"/>
+
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

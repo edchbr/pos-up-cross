@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:behaviors="clr-namespace:AppEdu.Behaviors;assembly=AppEdu"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="{Binding Title}"
              x:Class="AppEdu.View.MainView">
     <ContentPage.Content>
         <ListView
@@ -10,7 +11,7 @@
             HasUnevenRows="True"
             SeparatorColor="DimGray"
             CachingStrategy="RecycleElement"
-            ItemsSource="{Binding Items}"
+            ItemsSource="{Binding Itens}"
             behaviors:AttachedItemTappedBehavior.Command="{Binding ItemClickCommand}"
             >
             <ListView.ItemTemplate>

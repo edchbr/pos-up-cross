@@ -10,7 +10,7 @@ namespace AppEdu.Infra.Api
     [Headers("Content-Type: application/json")]
     public interface ITmdbApi
     {
-        [Get("/tv/popular?api_key=(apiKey)")]
+        [Get("/3/tv/popular?api_key={apiKey}")]
         Task<SerieResponse> GetSerieResponseAsync(string apiKey);
     }
 }
